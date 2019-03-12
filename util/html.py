@@ -1,4 +1,4 @@
-
+import dominate
 from dominate.tags import *
 from dominate.document import document
 import os
