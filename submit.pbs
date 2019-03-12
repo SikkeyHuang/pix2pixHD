@@ -1,0 +1,11 @@
+#! /bin/bash
+# ===== PBS Options ========
+#PBS -N "atobGan"
+#PBS -q copperhead
+#PBS -l walltime=100:00:00
+#PBS -l mem=128GB 
+#PBS -l nodes=1:ppn=8:gpus=8:gtx1080ti
+
+module load pytorch/0.4.0-anaconda3-cuda9.2-sm6.1
+cd /scratch/shuang9/pix2pixHD/
+python3 train.py --name gray2color_512p --label_nc 0 --no_instance --resize_or_crop none --batchSize 8 --gpu_ids 0,1,2,3,4,5,6,7
