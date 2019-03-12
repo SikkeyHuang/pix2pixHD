@@ -388,7 +388,8 @@ from torchvision import models
 class Vgg19(torch.nn.Module):
     def __init__(self, requires_grad=False):
         super(Vgg19, self).__init__()
-        vgg_pretrained_features = models.vgg19(pretrained=True).features
+        #vgg_pretrained_features = models.vgg19(pretrained=True).features
+        vgg_pretrained_features = models.load_state_dict(torch.load('/scratch/shuang9/pix2pixHD/vgg19-dcbb9e9d.pth')).features
         self.slice1 = torch.nn.Sequential()
         self.slice2 = torch.nn.Sequential()
         self.slice3 = torch.nn.Sequential()
