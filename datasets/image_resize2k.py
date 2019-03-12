@@ -2,15 +2,16 @@ from PIL import Image
 import os
 from os.path import join
 
-target_width = 512
-target_height = 288
-
+#target_width = 510
+#target_height = 288
+target_width = 2048
+target_height = 1152
 
 count = 0
 croped = 0
-log = open('lrlog.txt','w')
-log2 = open('lrfilter.txt','w')
-for root, dirs, files in os.walk('/scratch/shuang9/pix2pixHD/datasets/color500'):
+log = open('hrlog.txt','w')
+log2 = open('hrfilter.txt','w')
+for root, dirs, files in os.walk('/scratch/shuang9/pix2pixHD/datasets/color2k'):
 	for name in files:
 		count = count+1
 		img = Image.open(join(root, name))
@@ -22,7 +23,7 @@ for root, dirs, files in os.walk('/scratch/shuang9/pix2pixHD/datasets/color500')
 			log.write(name+' ('+str(ow)+','+str(oh)+') ->'+str(result.size)+'\n')
 			croped = croped+1
 			
-		elif ow>=510 and oh>=target_height:
+		elif ow>=2040 and oh>=target_height:
 			new_image=img.resize((target_width, oh), Image.BICUBIC)
 			result = new_image.crop((0, 0,  target_width, target_height))
 			result.save(join(root, name))	
@@ -36,7 +37,7 @@ for root, dirs, files in os.walk('/scratch/shuang9/pix2pixHD/datasets/color500')
 
 log2.close()
 
-rm_images= open('lrfilter.txt','r')
+rm_images= open('hrfilter.txt','r')
 
 while True:
 	img = rm_images.readline().strip()
@@ -45,7 +46,7 @@ while True:
 	os.remove(img)
 
 checkcount = 0
-for root, dirs, files in os.walk('/scratch/shuang9/pix2pixHD/datasets/color500'):
+for root, dirs, files in os.walk('/scratch/shuang9/pix2pixHD/datasets/color2k'):
 	for name in files:
 		img = Image.open(join(root, name))
 		ow, oh = img.size
