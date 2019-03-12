@@ -1,5 +1,6 @@
-import dominate
+
 from dominate.tags import *
+from dominate.document import document
 import os
 
 
@@ -13,7 +14,7 @@ class HTML:
         if not os.path.exists(self.img_dir):
             os.makedirs(self.img_dir)
 
-        self.doc = dominate.document(title=title)
+        self.doc = document(title=title)
         if refresh > 0:
             with self.doc.head:
                 meta(http_equiv="refresh", content=str(refresh))
