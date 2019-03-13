@@ -175,7 +175,7 @@ class Pix2PixHDModel(BaseModel):
         # GAN loss (Fake Passability Loss)        
         pred_fake = self.netD.forward(torch.cat((input_label, fake_image), dim=1))        
         loss_G_GAN = self.criterionGAN(pred_fake, True)
-        loss_G_GAN = loss_G_GAN.reshape(1)
+
         # GAN feature matching loss
         loss_G_GAN_Feat = 0
         if not self.opt.no_ganFeat_loss:
@@ -190,7 +190,12 @@ class Pix2PixHDModel(BaseModel):
         loss_G_VGG = 0
         if not self.opt.no_vgg_loss:
             loss_G_VGG = self.criterionVGG(fake_image, real_image) * self.opt.lambda_feat
-        
+
+        loss_G_GAN = loss_G_GAN.reshape(1)
+        loss_G_GAN_Feat = loss_G_GAN_Feat.reshape(1)
+        loss_G_VGG = loss_G_VGG.reshape(1)
+        loss_D_real = loss_D_real.reshape(1)
+        loss_D_fake = loss_D_fake.reshape(1)
         # Only return the fake_B image if necessary to save BW
         return [ self.loss_filter( loss_G_GAN, loss_G_GAN_Feat, loss_G_VGG, loss_D_real, loss_D_fake ), None if not infer else fake_image ]
 
