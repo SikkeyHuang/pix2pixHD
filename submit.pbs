@@ -8,4 +8,4 @@
 
 module load pytorch/0.4.0-anaconda3-cuda9.2-sm6.1
 cd /scratch/shuang9/pix2pixHD/
-python3 train.py --name gray2color_512p --label_nc 0 --no_instance --resize_or_crop none --batchSize 8 --gpu_ids 0,1,2,3,4,5,6,7
+python3 train.py --name gray2color_512p --label_nc 0 --no_instance --resize_or_crop none --load_pretrain checkpoints/gray2color_512p/ --batchSize 8 --gpu_ids 0,1,2,3,4,5,6,7 --tf_log
