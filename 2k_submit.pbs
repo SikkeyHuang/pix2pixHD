@@ -8,4 +8,4 @@
 
 module load pytorch/0.4.0-anaconda3-cuda9.2-sm6.1
 cd /scratch/shuang9/pix2pixHD/
-python3 train.py --name gray2color_2048p --dataroot ./datasets/color2k/ --label_nc 0 --no_instance --netG local --num_D 3 --ngf 32 --resize_or_crop crop --fineSize 1024 --load_pretrain checkpoints/gray2color_512p/ --tf_log
+python3 train.py --name new_gray2color_2048p --dataroot ./datasets/color2k/ --label_nc 0 --no_instance --netG local --num_D 3 --ngf 32 --resize_or_crop crop --fineSize 1024 --load_pretrain checkpoints/gray2color_512p/ --tf_log
