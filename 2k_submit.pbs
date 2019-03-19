@@ -3,7 +3,7 @@
 #PBS -N "2k_atobGan"
 #PBS -q copperhead
 #PBS -l walltime=100:00:00
-#PBS -l mem=128GB 
+#PBS -l mem=80GB 
 #PBS -l nodes=1:ppn=1:gpus=1:gtx1080ti
 
 module load pytorch/0.4.0-anaconda3-cuda9.2-sm6.1
