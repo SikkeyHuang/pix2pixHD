@@ -1,0 +1,11 @@
+#! /bin/bash
+# ===== PBS Options ========
+#PBS -N "2k_atobGan_hrate"
+#PBS -q copperhead
+#PBS -l walltime=100:00:00
+#PBS -l mem=80GB 
+#PBS -l nodes=1:ppn=1:gpus=1:gtx1080ti
+
+module load pytorch/0.4.0-anaconda3-cuda9.2-sm6.1
+cd /scratch/shuang9/pix2pixHD/
+python3 train.py --name hr_gray2color_2048p --dataroot ./datasets/color2k/ --label_nc 0 --no_instance --netG local --num_D 3 --ngf 32 --resize_or_crop crop --fineSize 1024 --load_pretrain checkpoints/final_gray2color_512p/ --tf_log
